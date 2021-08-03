@@ -1,0 +1,8 @@
+mosestokenizer
+nltk
+gensim
+pandas
+numpy
+pickle
+torch
+scikit-learn
