@@ -57,7 +57,9 @@ The input bitexts file are expected to have one sentence per line. See ```parall
 and ```parallel_corpus/en-so/so-raw.txt``` as example. The stopwords are expected to have one word per line. See
 ```stopwords/stopwords-en.txt``` and ```stopwords/stopwords-so.txt``` as example.
 
-To run the demo example, we can preprocess the English-Somali paralell corpus from ParaCrawl with the following command: 
+We provide concrete commands to run a demo example with the English-Somali language pair. We include the English-Somali 
+parallel corpus from ParaCrawl in the `parallel_corpus/` directory for the demo example. To run the demo example, please 
+run:
 ```bash
 python preprocess_bitext.py --src_language so \
                             --en_bitext_path ../parallel_corpus/en-so/en-raw.txt \
@@ -69,9 +71,13 @@ python preprocess_bitext.py --src_language so \
 ```
 
 ## Build the vocabulary
-We build the vocabulary set from the parallel bitext using the ```src/build_vocab.py``` This script will build the 
-vocabulary of both English and the low-resource language, and will also load the monolingual word embeddings of both 
-languages. 
+We build the vocabulary set from the parallel bitext using the ```src/build_vocab.py``` This script will 
+1. build the vocabulary of both English and the low-resource language from the bitext,
+2. load the monolingual word embeddings of both English and the low-resource language, 
+3. vectorize the bitext using the built vocabulary set.
+
+Before running the script, please download the monolingual word embeddings of English and the low-resource language to 
+folder `embeddings/`.
 
 You can run the script by:
 ```bash
@@ -84,7 +90,9 @@ python build_vocab.py [-h] [--src_language SRC_LANGUAGE]
                       [--output_dir OUTPUT_DIR]
 ```
 
-To run the English-Somali demo example, please run
+To run the English-Somali demo example, please first download English monolingual word embeddings (from word2vec) to 
+`embeddings/GoogleNews-vectors-negative300.bin` and Somali monolingual word embeddings (from fasttext) to 
+`embeddings/cc.so.300.vec`.
 ```bash
 python build_vocab.py --src_language so\
                       --en_preprocessed_bitext_path ../parallel_corpus/en-so/en-preprocessed.txt\
